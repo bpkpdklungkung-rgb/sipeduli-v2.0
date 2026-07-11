@@ -3,7 +3,7 @@
 // ============================================
 
 // GANTI URL INI DENGAN URL WEB APP ANDA
-const API_URL = 'https://script.google.com/macros/s/AKfycbzPMcEjfQ3voTtXNOIBFmVSVCffuzpbw7QbRBe-XX7RjNfkx61kxd-hbphQLL8Lb2Mg/exec';
+const API_URL = 'https://script.google.com/macros/s/AKfycbxXBYfs4du-cN99-snMLZIFJGkfPcsuX4FaUQmglj6w7182PMcybW2KNBqMw66ESXyE/exec';
 
 console.log('🔧 SIPEDULI BADUNG Helper.js loaded');
 console.log('📍 API_URL:', API_URL);
