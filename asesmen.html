@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>e-Asesmen - SIPEDULI BADUNG 2.0</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header p-3 text-center">
+            <i class="bi bi-heart-pulse-fill fs-2 text-white"></i>
+            <h6 class="text-white fw-bold mt-2 mb-0">SIPEDULI BADUNG 2.0</h6>
+            <small class="text-white-50">e-Asesmen</small>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="nav-link-sidebar"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a>
+            <a href="data-disabilitas.html" class="nav-link-sidebar"><i class="bi bi-people me-2"></i>Data Disabilitas</a>
+            <a href="asesmen.html" class="nav-link-sidebar active"><i class="bi bi-clipboard2-check me-2"></i>e-Asesmen</a>
+            <a href="bantuan.html" class="nav-link-sidebar"><i class="bi bi-gift me-2"></i>Bantuan</a>
+            <a href="monitoring.html" class="nav-link-sidebar"><i class="bi bi-graph-up me-2"></i>Monitoring</a>
+            <a href="peta.html" class="nav-link-sidebar"><i class="bi bi-geo-alt me-2"></i>Peta</a>
+            <a href="laporan.html" class="nav-link-sidebar"><i class="bi bi-file-earmark-bar-graph me-2"></i>Laporan</a>
+            <a href="pimpinan.html" class="nav-link-sidebar"><i class="bi bi-bar-chart-line me-2"></i>Dashboard Pimpinan</a>
+            <hr class="text-white-50 mx-3">
+            <a href="login.html" class="nav-link-sidebar text-danger" onclick="sessionStorage.clear()"><i class="bi bi-box-arrow-right me-2"></i>Keluar</a>
+        </nav>
+    </div>
+
+    <div class="main-content">
+        <nav class="navbar top-navbar shadow-sm px-4">
+            <button class="btn btn-sm btn-outline-secondary d-lg-none" onclick="toggleSidebar()"><i class="bi bi-list"></i></button>
+            <h5 class="mb-0 fw-bold" style="color: var(--maroon);">e-Asesmen Kebutuhan</h5>
+            <button class="btn btn-maroon btn-sm rounded-pill" data-bs-toggle="modal" data-bs-target="#modalAsesmen">
+                <i class="bi bi-plus-circle me-1"></i>Asesmen Baru
+            </button>
+        </nav>
+
+        <div class="content-area p-4">
+            <div class="row g-3 mb-4">
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm p-3 text-center bg-danger bg-opacity-10">
+                        <i class="bi bi-exclamation-triangle-fill text-danger fs-2"></i>
+                        <h4 class="fw-bold mt-2 mb-0" id="statP1">0</h4>
+                        <small class="text-muted">Prioritas I (Urgent)</small>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm p-3 text-center bg-warning bg-opacity-10">
+                        <i class="bi bi-hourglass-split text-warning fs-2"></i>
+                        <h4 class="fw-bold mt-2 mb-0" id="statP2">0</h4>
+                        <small class="text-muted">Prioritas II (Segera)</small>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm p-3 text-center bg-success bg-opacity-10">
+                        <i class="bi bi-check-circle-fill text-success fs-2"></i>
+                        <h4 class="fw-bold mt-2 mb-0" id="statP3">0</h4>
+                        <small class="text-muted">Prioritas III (Reguler)</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-white fw-bold" style="color: var(--maroon);">
+                    <i class="bi bi-list-check me-2"></i>Hasil Asesmen & Skoring
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead class="bg-maroon text-white">
+                                <tr><th>No</th><th>Nama</th><th>NIK</th><th>DTKS</th><th>Desil</th><th>Jenis Disabilitas</th><th>Skor</th><th>Kategori</th></tr>
+                            </thead>
+                            <tbody id="tbodyAsesmen"><tr><td colspan="8" class="text-center py-3">Memuat data...</td></tr></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalAsesmen" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-maroon text-white">
+                    <h5 class="modal-title"><i class="bi bi-clipboard2-check me-2"></i>Form e-Asesmen</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formAsesmen">
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Pilih Penyandang Disabilitas *</label>
+                            <select class="form-select" name="disabilitas_id" id="selectDisabilitas" required onchange="autoFillAsesmen()">
+                                <option value="">-- Pilih --</option>
+                            </select>
+                        </div>
+                        <div class="row g-3">
+                            <div class="col-md-6"><label class="form-label fw-semibold">Nama</label><input type="text" class="form-control" id="infoNama" readonly></div>
+                            <div class="col-md-6"><label class="form-label fw-semibold">NIK</label><input type="text" class="form-control" id="infoNik" readonly></div>
+                            <div class="col-md-6"><label class="form-label fw-semibold">Status DTKS</label><input type="text" class="form-control" id="infoDtks" readonly></div>
+                            <div class="col-md-6"><label class="form-label fw-semibold">Desil</label><input type="text" class="form-control" id="infoDesil" readonly></div>
+                            <div class="col-md-12"><label class="form-label fw-semibold">Jenis Disabilitas (UU No. 5/2026)</label><input type="text" class="form-control" id="infoJenis" readonly></div>
+                            <div class="col-12"><label class="form-label fw-semibold">Rekomendasi Asesor</label><textarea class="form-control" name="rekomendasi" rows="2"></textarea></div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-maroon" onclick="submitAsesmen()"><i class="bi bi-calculator me-1"></i>HITUNG SKOR & SIMPAN</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/helper.js"></script>
+    <script>
+        let dataDisabilitas = [];
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadDropdown();
+            loadAsesmen();
+        });
+
+        async function loadDropdown() {
+            const result = await getDisabilitas({});
+            if (result && result.success) {
+                dataDisabilitas = result.data;
+                const select = document.getElementById('selectDisabilitas');
+                select.innerHTML = '<option value="">-- Pilih --</option>' + 
+                    result.data.map(d => `<option value="${d.id}" data-nama="${d.nama}" data-nik="${d.nik}" data-dtks="${d.dtks}" data-desil="${d.desil}" data-jenis="${d.jenis_disabilitas_uu}">${d.nama} - ${d.nik}</option>`).join('');
+            }
+        }
+
+        function autoFillAsesmen() {
+            const select = document.getElementById('selectDisabilitas');
+            const option = select.options[select.selectedIndex];
+            document.getElementById('infoNama').value = option.dataset.nama || '';
+            document.getElementById('infoNik').value = option.dataset.nik || '';
+            document.getElementById('infoDtks').value = option.dataset.dtks || 'Tidak';
+            document.getElementById('infoDesil').value = option.dataset.desil || '-';
+            document.getElementById('infoJenis').value = option.dataset.jenis || '-';
+        }
+
+        async function loadAsesmen() {
+            showLoading('Memuat data asesmen...');
+            const result = await getAsesmen({});
+            hideLoading();
+            
+            if (result && result.success) {
+                renderAsesmen(result.data);
+                updateStats(result.data);
+            }
+        }
+
+        function renderAsesmen(data) {
+            const tbody = document.getElementById('tbodyAsesmen');
+            if (!data || data.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="8" class="text-center text-muted py-4">Belum ada data asesmen</td></tr>';
+                return;
+            }
+            tbody.innerHTML = data.map((r, i) => {
+                let badge = 'bg-secondary';
+                if (r.kategori_prioritas === 'PRIORITAS I') badge = 'bg-danger';
+                else if (r.kategori_prioritas === 'PRIORITAS II') badge = 'bg-warning text-dark';
+                else if (r.kategori_prioritas === 'PRIORITAS III') badge = 'bg-success';
+                
+                return `<tr>
+                    <td>${i+1}</td><td><strong>${r.nama||'-'}</strong></td><td>${r.nik||'-'}</td>
+                    <td>${r.dtks||'-'}</td><td>${r.desil||'-'}</td><td>${r.jenis_disabilitas_uu||'-'}</td>
+                    <td><span class="badge bg-maroon">${r.skor||0}</span></td>
+                    <td><span class="badge ${badge}">${r.kategori_prioritas||'-'}</span></td>
+                </tr>`;
+            }).join('');
+        }
+
+        function updateStats(data) {
+            let p1=0, p2=0, p3=0;
+            data.forEach(r => {
+                if (r.kategori_prioritas === 'PRIORITAS I') p1++;
+                else if (r.kategori_prioritas === 'PRIORITAS II') p2++;
+                else p3++;
+            });
+            document.getElementById('statP1').textContent = p1;
+            document.getElementById('statP2').textContent = p2;
+            document.getElementById('statP3').textContent = p3;
+        }
+
+        async function submitAsesmen() {
+            const form = document.getElementById('formAsesmen');
+            const data = Object.fromEntries(new FormData(form).entries());
+            
+            if (!data.disabilitas_id) { showNotif('Pilih penyandang disabilitas!', 'danger'); return; }
+            
+            const select = document.getElementById('selectDisabilitas');
+            const option = select.options[select.selectedIndex];
+            data.nama = option.dataset.nama;
+            data.nik = option.dataset.nik;
+            data.dtks = option.dataset.dtks;
+            data.desil = option.dataset.desil;
+            data.jenis_disabilitas_uu = option.dataset.jenis;
+            data.tanggal_asesmen = new Date().toISOString().split('T')[0];
+            data.asesor = sessionStorage.getItem('userName') || 'Admin';
+
+            showLoading('Menghitung skor...');
+            const result = await saveAsesmen(data);
+            hideLoading();
+
+            if (result && result.success) {
+                showNotif(`✅ Asesmen berhasil! Skor: ${result.skor} - ${result.kategori}`, 'success');
+                bootstrap.Modal.getInstance(document.getElementById('modalAsesmen')).hide();
+                form.reset();
+                loadAsesmen();
+            } else {
+                showNotif(' Gagal menyimpan asesmen', 'danger');
+            }
+        }
+
+        function toggleSidebar() { document.getElementById('sidebar').classList.toggle('show'); }
+    </script>
+</body>
+</html>

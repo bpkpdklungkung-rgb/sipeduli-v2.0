@@ -1,0 +1,266 @@
+/* ============================================
+   SIPEDULI BADUNG 2.0 - STYLESHEET
+   Tema: Merah Maroon & Navy Blue
+   ============================================ */
+
+:root {
+    --maroon: #8B1A1A;
+    --maroon-dark: #5C0E0E;
+    --maroon-light: rgba(139, 26, 26, 0.1);
+    --navy: #1e3a5f;
+    --navy-dark: #0f1f33;
+    --gold: #d4a017;
+    --white: #ffffff;
+    --gray: #6c757d;
+    --light: #f8f9fa;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--light);
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Navbar & Sidebar */
+.bg-maroon {
+    background: linear-gradient(135deg, var(--maroon) 0%, var(--maroon-dark) 100%) !important;
+}
+
+.bg-navy {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%) !important;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 260px;
+    height: 100vh;
+    background: linear-gradient(180deg, var(--maroon) 0%, var(--maroon-dark) 100%);
+    z-index: 1000;
+    overflow-y: auto;
+    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-header {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%);
+    border-bottom: 3px solid var(--gold);
+    padding: 20px;
+}
+
+.nav-link-sidebar {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-left: 4px solid transparent;
+}
+
+.nav-link-sidebar:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--white);
+    border-left-color: var(--gold);
+}
+
+.nav-link-sidebar.active {
+    background: linear-gradient(90deg, var(--navy) 0%, var(--navy-dark) 100%);
+    color: var(--white);
+    border-left-color: var(--gold);
+    font-weight: 600;
+}
+
+.main-content {
+    margin-left: 260px;
+    min-height: 100vh;
+}
+
+.top-navbar {
+    background: var(--white);
+    min-height: 60px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    border-bottom: 3px solid var(--maroon);
+}
+
+.content-area {
+    padding: 30px;
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(135deg, var(--maroon) 0%, var(--maroon-dark) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Stat Cards */
+.stat-card {
+    background: var(--white);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    border-top: 4px solid var(--maroon);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.stat-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+.stat-card-dash {
+    background: var(--white);
+    border-left: 5px solid var(--maroon);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.stat-card-dash:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* Feature Cards */
+.feature-card {
+    background: var(--white);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    border-top: 5px solid var(--maroon);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.feature-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+    border-top-color: var(--navy);
+}
+
+/* Buttons */
+.btn-maroon {
+    background: linear-gradient(135deg, var(--maroon) 0%, var(--maroon-dark) 100%);
+    color: var(--white);
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.btn-maroon:hover {
+    background: linear-gradient(135deg, var(--maroon-dark) 0%, var(--maroon) 100%);
+    color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(139, 26, 26, 0.4);
+}
+
+.btn-navy {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%);
+    color: var(--white);
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.btn-navy:hover {
+    background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%);
+    color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(30, 58, 95, 0.4);
+}
+
+/* Login Page */
+.bg-login {
+    background: linear-gradient(135deg, var(--maroon) 0%, var(--maroon-dark) 100%);
+    min-height: 100vh;
+}
+
+.login-card {
+    background: var(--white);
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    border-top: 5px solid var(--gold);
+}
+
+.login-icon {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, var(--maroon-light) 0%, rgba(30, 58, 95, 0.1) 100%);
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    border: 3px solid var(--gold);
+}
+
+.login-icon i {
+    font-size: 3rem;
+    color: var(--maroon);
+}
+
+/* Tables */
+.table thead {
+    background: linear-gradient(135deg, var(--maroon) 0%, var(--maroon-dark) 100%);
+}
+
+.table-hover tbody tr:hover {
+    background-color: var(--maroon-light);
+}
+
+/* Cards */
+.card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.card-header {
+    background: linear-gradient(135deg, var(--maroon) 0%, var(--maroon-dark) 100%);
+    color: var(--white);
+    border-bottom: 3px solid var(--gold);
+    font-weight: 600;
+    padding: 15px 20px;
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+    .sidebar {
+        transform: translateX(-100%);
+    }
+    .sidebar.show {
+        transform: translateX(0);
+    }
+    .main-content {
+        margin-left: 0;
+    }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.card, .stat-card, .feature-card {
+    animation: fadeIn 0.5s ease;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--light);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--maroon) 0%, var(--navy) 100%);
+    border-radius: 5px;
+}

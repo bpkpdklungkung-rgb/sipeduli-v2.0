@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - SIPEDULI BADUNG 2.0</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header p-3 text-center">
+            <i class="bi bi-heart-pulse-fill fs-2 text-white"></i>
+            <h6 class="text-white fw-bold mt-2 mb-0">SIPEDULI BADUNG 2.0</h6>
+            <small class="text-white-50">Dashboard</small>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="nav-link-sidebar active"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a>
+            <a href="data-disabilitas.html" class="nav-link-sidebar"><i class="bi bi-people me-2"></i>Data Disabilitas</a>
+            <a href="asesmen.html" class="nav-link-sidebar"><i class="bi bi-clipboard2-check me-2"></i>e-Asesmen</a>
+            <a href="bantuan.html" class="nav-link-sidebar"><i class="bi bi-gift me-2"></i>Bantuan</a>
+            <a href="monitoring.html" class="nav-link-sidebar"><i class="bi bi-graph-up me-2"></i>Monitoring</a>
+            <a href="peta.html" class="nav-link-sidebar"><i class="bi bi-geo-alt me-2"></i>Peta</a>
+            <a href="laporan.html" class="nav-link-sidebar"><i class="bi bi-file-earmark-bar-graph me-2"></i>Laporan</a>
+            <a href="pimpinan.html" class="nav-link-sidebar"><i class="bi bi-bar-chart-line me-2"></i>Dashboard Pimpinan</a>
+            <hr class="text-white-50 mx-3">
+            <a href="login.html" class="nav-link-sidebar text-danger" onclick="sessionStorage.clear()"><i class="bi bi-box-arrow-right me-2"></i>Keluar</a>
+        </nav>
+    </div>
+
+    <div class="main-content">
+        <nav class="navbar top-navbar shadow-sm px-4">
+            <button class="btn btn-sm btn-outline-secondary d-lg-none" onclick="toggleSidebar()"><i class="bi bi-list"></i></button>
+            <h5 class="mb-0 fw-bold" style="color: var(--maroon);">Dashboard</h5>
+            <div class="d-flex align-items-center">
+                <span class="me-3 d-none d-md-inline">
+                    <i class="bi bi-person-circle me-1"></i>
+                    <span id="displayUser">Admin</span>
+                </span>
+                <span class="badge" style="background: var(--maroon);" id="currentDate"></span>
+            </div>
+        </nav>
+
+        <div class="content-area p-4">
+            <div class="row g-3 mb-4">
+                <div class="col-xl-3 col-md-6">
+                    <div class="stat-card-dash d-flex align-items-center p-3 rounded-3 shadow-sm bg-white">
+                        <div class="stat-icon" style="background: var(--maroon-light); color: var(--maroon); width: 60px; height: 60px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; margin-right: 15px;">
+                            <i class="bi bi-people-fill"></i>
+                        </div>
+                        <div>
+                            <small class="text-muted">Total Penyandang Disabilitas</small>
+                            <h4 class="fw-bold mb-0" id="statDisabilitas">0</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="stat-card-dash d-flex align-items-center p-3 rounded-3 shadow-sm bg-white">
+                        <div class="stat-icon" style="background: rgba(25, 135, 84, 0.1); color: #198754; width: 60px; height: 60px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; margin-right: 15px;">
+                            <i class="bi bi-check-circle"></i>
+                        </div>
+                        <div>
+                            <small class="text-muted">Sudah Mendapat Bantuan</small>
+                            <h4 class="fw-bold mb-0" id="statBantuan">0</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="stat-card-dash d-flex align-items-center p-3 rounded-3 shadow-sm bg-white">
+                        <div class="stat-icon" style="background: rgba(255, 193, 7, 0.1); color: #ffc107; width: 60px; height: 60px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; margin-right: 15px;">
+                            <i class="bi bi-hourglass-split"></i>
+                        </div>
+                        <div>
+                            <small class="text-muted">Menunggu Bantuan</small>
+                            <h4 class="fw-bold mb-0" id="statMenunggu">0</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="stat-card-dash d-flex align-items-center p-3 rounded-3 shadow-sm bg-white">
+                        <div class="stat-icon" style="background: rgba(13, 202, 240, 0.1); color: #0dcaf0; width: 60px; height: 60px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; margin-right: 15px;">
+                            <i class="bi bi-people"></i>
+                        </div>
+                        <div>
+                            <small class="text-muted">Dalam Pendampingan</small>
+                            <h4 class="fw-bold mb-0" id="statPendampingan">0</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-3 mb-4">
+                <div class="col-lg-8">
+                    <div class="card shadow-sm border-0">
+                        <div class="card-header bg-white fw-bold" style="color: var(--maroon); border-bottom: 3px solid var(--gold);">
+                            <i class="bi bi-geo-alt me-2"></i>Peta Sebaran Penyandang Disabilitas
+                        </div>
+                        <div class="card-body">
+                            <div id="map" style="height:400px; border-radius:8px;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card shadow-sm border-0">
+                        <div class="card-header bg-white fw-bold" style="color: var(--maroon); border-bottom: 3px solid var(--gold);">
+                            <i class="bi bi-exclamation-diamond me-2"></i>Prioritas Tinggi
+                        </div>
+                        <div class="card-body p-0">
+                            <ul class="list-group list-group-flush" id="listPrioritas">
+                                <li class="list-group-item text-center text-muted py-4">Memuat data...</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-white fw-bold" style="color: var(--maroon); border-bottom: 3px solid var(--gold);">
+                    <i class="bi bi-list-ol me-2"></i>Data Terbaru
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead class="bg-maroon text-white">
+                                <tr>
+                                    <th>No</th><th>Nama</th><th>NIK</th><th>Kecamatan</th>
+                                    <th>Jenis Disabilitas</th><th>DTKS</th><th>Desil</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbodyTerbaru">
+                                <tr><td colspan="7" class="text-center py-3">Memuat data...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="assets/js/helper.js"></script>
+    <script>
+        document.getElementById('currentDate').textContent = new Date().toLocaleDateString('id-ID', {
+            weekday:'long', year:'numeric', month:'long', day:'numeric'
+        });
+        document.getElementById('displayUser').textContent = sessionStorage.getItem('userName') || 'Admin';
+
+        async function loadDashboard() {
+            showLoading('Memuat data...');
+            
+            try {
+                const [stats, disabilitasResult, prioritasResult] = await Promise.all([
+                    getStats(),
+                    getDisabilitas({}),
+                    getPrioritas()
+                ]);
+
+                if (stats && stats.success) {
+                    document.getElementById('statDisabilitas').textContent = stats.data.totalDisabilitas || 0;
+                    document.getElementById('statBantuan').textContent = stats.data.sudahBantuan || 0;
+                    document.getElementById('statMenunggu').textContent = stats.data.menungguBantuan || 0;
+                    document.getElementById('statPendampingan').textContent = stats.data.dalamPendampingan || 0;
+                }
+
+                if (disabilitasResult && disabilitasResult.success) {
+                    const tbody = document.getElementById('tbodyTerbaru');
+                    if (disabilitasResult.data.length > 0) {
+                        tbody.innerHTML = disabilitasResult.data.slice(0, 5).map((r, i) => {
+                            let badgeDTKS = r.dtks === 'Ya' ? 'bg-success' : 'bg-secondary';
+                            let badgeDesil = parseInt(r.desil) <= 3 ? 'bg-danger' : 'bg-info';
+                            return `<tr>
+                                <td>${i+1}</td>
+                                <td><strong>${r.nama || '-'}</strong></td>
+                                <td>${r.nik || '-'}</td>
+                                <td>${r.kecamatan || '-'}</td>
+                                <td><span class="badge" style="background: var(--maroon);">${r.jenis_disabilitas_uu || '-'}</span></td>
+                                <td><span class="badge ${badgeDTKS}">${r.dtks || 'Tidak'}</span></td>
+                                <td><span class="badge ${badgeDesil}">${r.desil || '-'}</span></td>
+                            </tr>`;
+                        }).join('');
+                    } else {
+                        tbody.innerHTML = '<tr><td colspan="7" class="text-center text-muted py-3">Belum ada data</td></tr>';
+                    }
+                }
+
+                if (prioritasResult && prioritasResult.success) {
+                    const listPrioritas = document.getElementById('listPrioritas');
+                    const prioritasTinggi = prioritasResult.data.filter(p => p.kategori_prioritas === 'PRIORITAS I').slice(0, 5);
+                    
+                    if (prioritasTinggi.length > 0) {
+                        listPrioritas.innerHTML = prioritasTinggi.map(p => `
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <strong>${p.nama || '-'}</strong><br>
+                                    <small class="text-muted">Skor: ${p.skor || 0} | ${p.kecamatan || '-'}</small>
+                                </div>
+                                <span class="badge bg-danger fs-6">URGENT</span>
+                            </li>
+                        `).join('');
+                    } else {
+                        listPrioritas.innerHTML = '<li class="list-group-item text-center text-muted py-4">Tidak ada prioritas urgent</li>';
+                    }
+                }
+
+                renderPeta(disabilitasResult);
+
+            } catch (error) {
+                console.error('Error:', error);
+            }
+            
+            hideLoading();
+        }
+
+        function renderPeta(disabilitasResult) {
+            const map = L.map('map').setView([-8.8006, 115.1785], 11);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { 
+                attribution: '© OpenStreetMap' 
+            }).addTo(map);
+
+            if (disabilitasResult && disabilitasResult.success && disabilitasResult.data.length > 0) {
+                disabilitasResult.data.forEach(d => {
+                    if (d.latitude && d.longitude) {
+                        let warna = '#198754';
+                        const desil = parseInt(d.desil);
+                        if (desil <= 3) warna = '#dc3545';
+                        else if (desil <= 5) warna = '#ffc107';
+                        
+                        L.circleMarker([d.latitude, d.longitude], {
+                            radius: 15,
+                            fillColor: warna,
+                            color: '#fff',
+                            weight: 2,
+                            fillOpacity: 0.9
+                        }).addTo(map).bindPopup(`
+                            <strong>${d.nama}</strong><br>
+                            <small>NIK: ${d.nik||'-'}</small><br>
+                            <small>Kecamatan: ${d.kecamatan||'-'}</small><br>
+                            <small>Desil: ${d.desil||'-'}</small>
+                        `);
+                    }
+                });
+            }
+        }
+
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('show');
+        }
+
+        loadDashboard();
+    </script>
+</body>
+</html>
